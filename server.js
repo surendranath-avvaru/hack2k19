@@ -1,6 +1,21 @@
 'use strict';
 
 const Hapi = require('hapi');
+const mongoose = require('mongoose');
+const mongoDbUri = 'mongodb://localhost:27017/hack2k18';
+const productRoutes = require('./src/routes/products.routes');
+
+mongoose.connect(mongoDbUri, {
+    useNewUrlParser: true
+});
+
+mongoose.connection.on('connected', () => {
+    console.log(`App is connected to ${mongoDbUri}`);
+});
+
+mongoose.connection.on('error', err => {
+    console.log('Error while connecting to mongodb', err);
+});
 
 const server = Hapi.server({
     port: 3000,
@@ -16,16 +31,6 @@ server.route({
     }
 });
 
-server.route({
-    method: 'GET',
-    path: '/{name}',
-    handler: (request, h) => {
-        request.logger.info('In handler %s', request.path);
-
-        return 'Hello, ' + encodeURIComponent(request.params.name) + '!';
-    }
-});
-
 const init = async () => {
     await server.register({
         plugin: require('hapi-pino'),
@@ -34,7 +39,8 @@ const init = async () => {
             logEvents: ['response', 'onPostStart']
         }
     });
-    
+
+    await server.route(productRoutes);
     await server.start();
     console.log(`Server running at: ${server.info.uri}`);
 };
