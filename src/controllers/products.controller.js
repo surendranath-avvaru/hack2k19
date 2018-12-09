@@ -14,5 +14,14 @@ module.exports = {
         }).catch((err) => {
             return { err: err };
         })
-    }
+    },
+
+    list(req, h) {
+        return Product.find()
+        .then((products) => {
+            return { products: products };
+        }).catch((err) => {
+            return { err: err };
+        });
+    },
 };

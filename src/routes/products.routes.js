@@ -20,5 +20,11 @@ module.exports = [
                 payload: schema
             }
         }
+    },
+
+    {
+        path: '/api/products',
+        method: 'GET',
+        handler: ProductController.list
     }
 ];

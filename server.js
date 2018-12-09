@@ -2,8 +2,9 @@
 
 const Hapi = require('hapi');
 const mongoose = require('mongoose');
-const mongoDbUri = 'mongodb://localhost:27017/hack2k18';
+const mongoDbUri = 'mongodb://localhost:27017/hack';
 const productRoutes = require('./src/routes/products.routes');
+const inventoryRoutes = require('./src/routes/inventory.routes');
 
 mongoose.connect(mongoDbUri, {
     useNewUrlParser: true
@@ -39,8 +40,21 @@ const init = async () => {
             logEvents: ['response', 'onPostStart']
         }
     });
+    // await server.register({
+    //     plugin: require('hapi-swagger'),
+    //     options: {
+    //         apiVersion: "0.0.1"
+    //     }
+    // }, function (err) {
+    //     if (err) {
+    //         server.log(['error'], 'hapi-swagger load error: ' + err)
+    //     } else {
+    //         server.log(['start'], 'hapi-swagger interface loaded')
+    //     }
+    // });
 
     await server.route(productRoutes);
+    await server.route(inventoryRoutes);
     await server.start();
     console.log(`Server running at: ${server.info.uri}`);
 };
