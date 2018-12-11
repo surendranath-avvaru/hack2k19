@@ -10,18 +10,7 @@ var ProductsSchema = new Schema({
     description: String,
     price: Number,
     discount: Number,
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
-    updatedAt: {
-        type: Date
-    }
-});
-
-ProductsSchema.pre('save', (next) => {
-    this.updatedAt = new Date();
-    next();
+    location: String
 });
 
 module.exports = mongoose.model('Products', ProductsSchema);

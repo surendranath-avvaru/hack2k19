@@ -6,7 +6,8 @@ module.exports = {
             name: req.payload.name,
             description: req.payload.description,
             price: req.payload.price,
-            discount: req.payload.discount
+            discount: req.payload.discount,
+            location: req.payload.location
         };
         
         return Product.create(productData).then((product)=> {

@@ -7,7 +7,8 @@ const schema = Joi.object().keys({
     name: Joi.string().max(100).required(),
     description: Joi.string().max(500),
     price: Joi.number(),
-    discount: Joi.number()
+    discount: Joi.number(),
+    location: Joi.string().max(100).required()
 });
 
 module.exports = [

@@ -9,20 +9,7 @@ const InventorySchema = new Schema({
         ref: 'Products'
     },
     count: Number,
-    trend: Number,
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now
-    }
-});
-
-InventorySchema.pre('save', (next) => {
-    this.updatedAt = new Date();
-    next();
+    trend: Number
 });
 
 module.exports = mongoose.model('Inventory', InventorySchema);
