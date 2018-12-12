@@ -10,6 +10,7 @@ const productRoutes = require('./src/routes/products.routes');
 const inventoryRoutes = require('./src/routes/inventory.routes');
 const roleRoutes = require('./src/routes/roles.routes');
 const userRoutes = require('./src/routes/users.routes');
+const cartRoutes = require('./src/routes/carts.routes');
 
 mongoose.connect(mongoDbUri, {
     useNewUrlParser: true
@@ -71,6 +72,7 @@ const init = async () => {
     await server.route(inventoryRoutes);
     await server.route(roleRoutes);
     await server.route(userRoutes);
+    await server.route(cartRoutes);
     await server.start();
     console.log(`Server running at: ${server.info.uri}`);
 };
