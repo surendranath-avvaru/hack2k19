@@ -11,6 +11,8 @@ const inventoryRoutes = require('./src/routes/inventory.routes');
 const roleRoutes = require('./src/routes/roles.routes');
 const userRoutes = require('./src/routes/users.routes');
 const cartRoutes = require('./src/routes/carts.routes');
+const walletRoutes = require('./src/routes/wallets.routes');
+const inDisplayRoutes = require('./src/routes/inDisplay.routes');
 
 mongoose.connect(mongoDbUri, {
     useNewUrlParser: true
@@ -73,6 +75,8 @@ const init = async () => {
     await server.route(roleRoutes);
     await server.route(userRoutes);
     await server.route(cartRoutes);
+    await server.route(walletRoutes);
+    await server.route(inDisplayRoutes);
     await server.start();
     console.log(`Server running at: ${server.info.uri}`);
 };
